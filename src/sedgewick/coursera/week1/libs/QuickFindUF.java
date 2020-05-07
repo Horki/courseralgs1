@@ -23,6 +23,9 @@ public class QuickFindUF implements UF<Integer> {
     (at most 2N + 2 array accesses)
      */
     public void union(Integer p, Integer q) {
+        if (connected(p, q)) {
+            return;
+        }
         int pid = id[p];
         int qid = id[q];
         for (int i = 0; i < count(); ++i) {
@@ -42,10 +45,10 @@ public class QuickFindUF implements UF<Integer> {
     }
 
     /*
-    Quadratic N2
+     O(1)
      */
     public Integer find(Integer p) {
-        return 0;
+        return id[p];
     }
 
     public int count() {

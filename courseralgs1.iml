@@ -18,5 +18,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="com.github.hazendaz.spotbugs:spotbugs-maven-plugin:3.0.5" level="application" />
   </component>
 </module>
