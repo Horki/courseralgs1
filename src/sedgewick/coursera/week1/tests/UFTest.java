@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class UFTest {
     private ArrayList<UF> ufs = new ArrayList<UF>(3);
+    private final int capacity = 10;
 
     @Before
     public void setUp() throws Exception {
@@ -28,36 +29,41 @@ public class UFTest {
 
     @Test
     public void union() {
-        for (UF quickUF : ufs) {
-            quickUF.union(4, 3);
-            quickUF.union(3, 8);
-            quickUF.union(9, 4);
-            Assert.assertEquals(true, quickUF.connected(3, 9));
-            Assert.assertEquals(true, quickUF.connected(3, 8));
-            Assert.assertEquals(true, quickUF.connected(3, 4));
-            Assert.assertEquals(true, quickUF.connected(9, 4));
-            Assert.assertEquals(true, quickUF.connected(4, 8));
+        for (UF uf : ufs) {
+            uf.union(4, 3);
+            uf.union(3, 8);
+            uf.union(9, 4);
+            Assert.assertTrue(uf.connected(3, 9));
+            Assert.assertTrue(uf.connected(3, 8));
+            Assert.assertTrue(uf.connected(3, 4));
+            Assert.assertTrue(uf.connected(9, 4));
+            Assert.assertTrue(uf.connected(4, 8));
         }
     }
 
     @Test
     public void connected() {
-        for (UF quickUF : ufs) {
-            quickUF.union(4, 3);
-            Assert.assertEquals(false, quickUF.connected(0, 7));
-            Assert.assertEquals(true, quickUF.connected(3, 4));
-            Assert.assertEquals(true, quickUF.connected(4, 3));
+        for (UF uf : ufs) {
+            uf.union(4, 3);
+            Assert.assertFalse(uf.connected(0, 7));
+            Assert.assertTrue(uf.connected(3, 4));
+            Assert.assertTrue(uf.connected(4, 3));
         }
     }
 
     @Test
     public void find() {
+        for (UF uf : ufs) {
+            for (int i = 0; i < capacity; ++i) {
+                Assert.assertEquals(i, uf.find(i));
+            }
+        }
     }
 
     @Test
     public void count() {
-        for (UF quickUF : ufs) {
-            Assert.assertEquals(quickUF.count(), 10);
+        for (UF uf : ufs) {
+            Assert.assertEquals(uf.count(), capacity);
         }
     }
 }

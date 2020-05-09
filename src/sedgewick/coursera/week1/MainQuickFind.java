@@ -8,7 +8,7 @@ import sedgewick.coursera.week1.libs.QuickFindUF;
 public class MainQuickFind {
     // Redirect input from
     // $PATH/tinyUF.txt
-    public static void main(String[] args) {
+    private static void from_file() {
         StdOut.println("Read from tinyUF.txt");
         int N = StdIn.readInt();
         UF quickFindText = new QuickFindUF(N);
@@ -20,9 +20,11 @@ public class MainQuickFind {
                 StdOut.println(p + " " + q);
             }
         }
-        // ------------------------------------
+    }
+
+    public static void main(String[] args) {
         StdOut.println("Hardcoded input");
-        UF quickFindUF = new QuickFindUF(N);
+        UF quickFindUF = new QuickFindUF(10);
         String output = "*****************\n" +
                 "0   1 - 2   3 - 4\n" +
                 "            |   |\n" +
@@ -34,6 +36,7 @@ public class MainQuickFind {
         quickFindUF.union(9, 4);
         quickFindUF.union(2, 1);
         StdOut.println(output);
+        quickFindUF.debug_output();
         StdOut.println("Test connectivity");
         StdOut.println("0 - 7: " + quickFindUF.connected(0, 7));
         StdOut.println("8 - 9: " + quickFindUF.connected(8, 9) + ": 8 - 3 - 4 - 9");
@@ -47,6 +50,7 @@ public class MainQuickFind {
                 "5 - 6   7   8   9\n" +
                 "*****************\n";
         StdOut.println(output);
+        quickFindUF.debug_output();
         StdOut.println("0 - 7: " + quickFindUF.connected(0, 7) + ": 0 - 1 - 2 - 7");
     }
 }

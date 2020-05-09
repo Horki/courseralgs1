@@ -5,6 +5,7 @@ import sedgewick.coursera.week1.interfaces.UF;
 public class QuickFindUF implements UF<Integer> {
     private Integer[] id;
     private int cnt;
+    private int capacity;
 
     /*
     Set id of each object to itself
@@ -12,6 +13,7 @@ public class QuickFindUF implements UF<Integer> {
      */
     public QuickFindUF(int N) {
         cnt = N;
+        capacity = N;
         id = new Integer[cnt];
         for (int i = 0; i < cnt; ++i) {
             id[i] = i;
@@ -26,22 +28,17 @@ public class QuickFindUF implements UF<Integer> {
         if (connected(p, q)) {
             return;
         }
-        int pid = id[p];
-        int qid = id[q];
-        for (int i = 0; i < count(); ++i) {
+        int pid = find(p);
+        int qid = find(q);
+        for (int i = 0; i < capacity; ++i) {
             if (id[i].equals(pid)) {
                 id[i] = qid;
             }
         }
     }
 
-    /*
-    check whether p and q
-    are in the same component
-    (2 array accesses)
-     */
     public boolean connected(Integer p, Integer q) {
-        return id[p].equals(id[q]);
+        return find(id[p]).equals(find(id[q]));
     }
 
     /*
@@ -54,4 +51,17 @@ public class QuickFindUF implements UF<Integer> {
     public int count() {
         return cnt;
     }
+
+    public void debug_output() {
+        System.out.print("*************************\nidx: ");
+        for (int k = 0; k < count(); ++k) {
+            System.out.print(k + " ");
+        }
+        System.out.print("\nval: ");
+        for (Integer v : id) {
+            System.out.print(v + " ");
+        }
+        System.out.println("\n*************************");
+    }
+
 }

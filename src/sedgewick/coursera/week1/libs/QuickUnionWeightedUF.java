@@ -6,14 +6,16 @@ public class QuickUnionWeightedUF implements UF<Integer> {
     private Integer[] id;
     private Integer[] sz;
     private int cnt;
+    private int capacity;
 
     public QuickUnionWeightedUF(int N) {
         cnt = N;
+        capacity = N;
         id = new Integer[cnt];
         sz = new Integer[cnt];
         for (int i = 0; i < cnt; ++i) {
             id[i] = i;
-            sz[i] = i;
+            sz[i] = 1;
         }
     }
 
@@ -21,11 +23,11 @@ public class QuickUnionWeightedUF implements UF<Integer> {
      Improved Union
      */
     public void union(Integer p, Integer q) {
-        Integer pid = root(p);
-        Integer qid = root(q);
-        if (pid.equals(qid)) {
+        if (connected(p, q)) {
             return;
         }
+        Integer pid = root(p);
+        Integer qid = root(q);
         if (sz[pid] < sz[qid]) {
             id[pid] = qid;
             sz[qid] += sz[pid];
@@ -33,6 +35,7 @@ public class QuickUnionWeightedUF implements UF<Integer> {
             id[qid] = pid;
             sz[pid] += sz[qid];
         }
+        --cnt;
     }
 
     public boolean connected(Integer p, Integer q) {
@@ -54,4 +57,20 @@ public class QuickUnionWeightedUF implements UF<Integer> {
         }
         return i;
     }
+    public void debug_output() {
+        System.out.print("*************************\nidx: ");
+        for (int k = 0; k < capacity; ++k) {
+            System.out.print(k + " ");
+        }
+        System.out.print("\nval: ");
+        for (Integer v : id) {
+            System.out.print(v + " ");
+        }
+        System.out.print("\nsiz: ");
+        for (Integer v : sz) {
+            System.out.print(v + " ");
+        }
+        System.out.println("\n*************************");
+    }
+
 }

@@ -1,23 +1,24 @@
 package sedgewick.coursera.week1.libs;
 
-import edu.princeton.cs.introcs.In;
 import sedgewick.coursera.week1.interfaces.UF;
 
 public class QuickUnionLargest implements UF<Integer> {
     private Integer[] id;
-    private Integer[] sz;
-    private Integer[] lar;
+    private Integer[] sizes;
+    private Integer[] largest;
     private int cnt;
+    private int capacity;
 
     public QuickUnionLargest(int N) {
         cnt = N;
+        capacity = N;
         id = new Integer[cnt];
-        sz = new Integer[cnt];
-        lar = new Integer[cnt];
-        for (int i = 0; i < cnt; ++i) {
+        sizes = new Integer[cnt];
+        largest = new Integer[cnt];
+        for (int i = 0; i < capacity; ++i) {
             id[i] = i;
-            sz[i] = i;
-            lar[i] = i;
+            sizes[i] = 1;
+            largest[i] = i;
         }
     }
 
@@ -25,23 +26,24 @@ public class QuickUnionLargest implements UF<Integer> {
      Improved Union
      */
     public void union(Integer p, Integer q) {
-        Integer pid = root(p);
-        Integer qid = root(q);
-        if (pid.equals(qid)) {
+        if (connected(p, q)) {
             return;
         }
-        Integer maxP = lar[pid];
-        Integer maxQ = lar[qid];
+        Integer pid = root(p);
+        Integer qid = root(q);
+        Integer largestP = largest[pid];
+        Integer largestQ = largest[qid];
 
-        if (sz[pid] < sz[qid]) {
+        if (sizes[pid] < sizes[qid]) {
             id[pid] = qid;
-            sz[qid] += sz[pid];
-            lar[qid] = (maxP > maxQ) ? maxP : maxQ;
+            sizes[qid] += sizes[pid];
+            largest[qid] = (largestP > largestQ) ? largestP : largestQ;
         } else {
             id[qid] = pid;
-            sz[pid] += sz[qid];
-            lar[pid] = (maxQ > maxP) ? maxQ : maxP;
+            sizes[pid] += sizes[qid];
+            largest[pid] = (largestQ > largestP) ? largestQ : largestP;
         }
+        --cnt;
     }
 
     public boolean connected(Integer p, Integer q) {
@@ -49,7 +51,7 @@ public class QuickUnionLargest implements UF<Integer> {
     }
 
     public Integer find(Integer p) {
-        return lar[root(p)];
+        return largest[root(p)];
     }
 
     public int count() {
@@ -63,4 +65,25 @@ public class QuickUnionLargest implements UF<Integer> {
         }
         return i;
     }
+
+    public void debug_output() {
+        System.out.print("*************************\nidx: ");
+        for (int k = 0; k < capacity; ++k) {
+            System.out.print(k + " ");
+        }
+        System.out.print("\nval: ");
+        for (Integer v : id) {
+            System.out.print(v + " ");
+        }
+        System.out.print("\nsiz: ");
+        for (Integer s : sizes) {
+            System.out.print(s + " ");
+        }
+        System.out.print("\nlar: ");
+        for (Integer l : largest) {
+            System.out.print(l + " ");
+        }
+        System.out.println("\n*************************");
+    }
+
 }

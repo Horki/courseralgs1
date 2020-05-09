@@ -5,6 +5,7 @@ import sedgewick.coursera.week1.interfaces.UF;
 public class QuickUnionUF implements UF<Integer> {
     private Integer[] id;
     private int cnt;
+    private int capacity;
 
     /*
     Set id of each object to itself
@@ -12,6 +13,7 @@ public class QuickUnionUF implements UF<Integer> {
      */
     public QuickUnionUF(int N) {
         cnt = N;
+        capacity = N;
         id = new Integer[cnt];
         for (int i = 0; i < cnt; ++i) {
             id[i] = i;
@@ -23,11 +25,15 @@ public class QuickUnionUF implements UF<Integer> {
     (depth of p and q array accesses)
      */
     public void union(Integer p, Integer q) {
-        Integer pid = root(p);
-        Integer qid = root(q);
+        if (connected(p, q)) {
+            return;
+        }
+        Integer pid = find(p);
+        Integer qid = find(q);
         if (!pid.equals(qid)) {
             id[pid] = qid;
         }
+        --cnt;
     }
 
     /*
@@ -35,7 +41,7 @@ public class QuickUnionUF implements UF<Integer> {
     (depth of p and q array accesses)
      */
     public boolean connected(Integer p, Integer q) {
-        return root(p).equals(root(q));
+        return find(p).equals(find(q));
     }
 
     /*
@@ -63,12 +69,12 @@ public class QuickUnionUF implements UF<Integer> {
     /*
     For debug
      */
-    public void output() {
-        System.out.print("*************************\nids:  ");
-        for (int k = 0; k < count(); ++k) {
+    public void debug_output() {
+        System.out.print("*************************\nidx: ");
+        for (int k = 0; k < capacity; ++k) {
             System.out.print(k + " ");
         }
-        System.out.print("\nvals: ");
+        System.out.print("\nval: ");
         for (Integer v : id) {
             System.out.print(v + " ");
         }
