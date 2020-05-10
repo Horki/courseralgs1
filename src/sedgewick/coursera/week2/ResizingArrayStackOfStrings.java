@@ -1,23 +1,13 @@
 package sedgewick.coursera.week2;
 
-interface Stack<T> {
-    void push(T n);
+import sedgewick.coursera.week2.interfaces.Stack;
 
-    T top();
-
-    T pop();
-
-    int size();
-
-    boolean isEmpty();
-}
-
-public class StackString implements Stack<String> {
+public class ResizingArrayStackOfStrings implements Stack<String> {
     private int capacity;
     private int size;
     private String data[];
 
-    public StackString(int c) {
+    public ResizingArrayStackOfStrings(int c) {
         capacity = c;
         size = 0;
         data = new String[capacity];
@@ -28,7 +18,6 @@ public class StackString implements Stack<String> {
             resize(capacity * 2);
         }
         data[size++] = n;
-
     }
 
     public String top() {
@@ -39,7 +28,7 @@ public class StackString implements Stack<String> {
         String result = data[--size];
         data[size] = null;
         // decrease capacity
-        if (capacity > 0 && capacity == (size    / 4)) {
+        if (capacity > 0 && capacity == (size / 4)) {
             resize(capacity / 2);
         }
         return result;
@@ -64,10 +53,10 @@ public class StackString implements Stack<String> {
     }
 
     public static void main(String[] args) {
-        StackString s = new StackString(5);
+        Stack s = new ResizingArrayStackOfStrings(5);
         s.push("one");
         s.push("two");
-        while (s.size() != 0) {
+        while (!s.isEmpty()) {
             System.out.println(s.pop());
         }
     }
