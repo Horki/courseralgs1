@@ -133,20 +133,16 @@ public class Point implements Comparable<Point> {
         if (this.equals(that)) {
             return 0;
         }
-        if (this.y > that.y) {
-            return 1;
+        if (y < that.y) {
+            return -1;
         }
-        if (this.y == that.y) {
-            if (this.x > that.x) {
-                return 1;
-            } else {
-                return -1;
-            }
+        if (y == that.y && x < that.x) {
+            return -1;
         }
-        return -1;
+        return 1;
     }
 
-    public boolean equals(Point that) {
+    private boolean equals(Point that) {
         if (x == that.x && y == that.y) {
             return true;
         }
