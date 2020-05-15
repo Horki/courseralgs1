@@ -13,11 +13,51 @@ package sedgewick.coursera.week3.tasks;
 import java.util.Comparator;
 
 import edu.princeton.cs.algs4.StdDraw;
+import edu.princeton.cs.algs4.StdOut;
 
+
+/*
+y
+^
+|          *
+| *
+|        *
+|   *
+|           *
+| *   *
+|            *
+|   *
+|        *
+|-------------------> x
+*******************************
+y
+^
+|          *
+| *       /
+|  \     *
+|   *   /
+|    \ /    *
+| *   *
+|    / \     *
+|   *   \
+|        *
+|-------------------> x
+ */
 public class Point implements Comparable<Point> {
 
     private final int x;     // x-coordinate of this point
     private final int y;     // y-coordinate of this point
+
+    private class SlopeOrder implements Comparator<Point> {
+        public int compare(Point p1, Point p2) {
+            double a = slopeTo(p1);
+            double b = slopeTo(p2);
+            if (a == b) {
+                return 0;
+            }
+            return (a > b) ? 1 : -1;
+        }
+    }
 
     /**
      * Initializes a new point.
@@ -62,7 +102,19 @@ public class Point implements Comparable<Point> {
      * @return the slope between this point and the specified point
      */
     public double slopeTo(Point that) {
-        /* YOUR CODE HERE */
+        // Equal
+        if (this.equals(that)) {
+            return Double.NEGATIVE_INFINITY;
+        }
+        // Horizontal
+        if (y == that.y) {
+            return +0.0;
+        }
+        // Vertical
+        if (x == that.x) {
+            return Double.POSITIVE_INFINITY;
+        }
+        return (double) (that.y - y) / (that.x - x);
     }
 
     /**
@@ -78,7 +130,27 @@ public class Point implements Comparable<Point> {
      * argument point
      */
     public int compareTo(Point that) {
-        /* YOUR CODE HERE */
+        if (this.equals(that)) {
+            return 0;
+        }
+        if (this.y > that.y) {
+            return 1;
+        }
+        if (this.y == that.y) {
+            if (this.x > that.x) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
+        return -1;
+    }
+
+    public boolean equals(Point that) {
+        if (x == that.x && y == that.y) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -88,7 +160,7 @@ public class Point implements Comparable<Point> {
      * @return the Comparator that defines this ordering on points
      */
     public Comparator<Point> slopeOrder() {
-        /* YOUR CODE HERE */
+        return new SlopeOrder();
     }
 
 
@@ -108,6 +180,16 @@ public class Point implements Comparable<Point> {
      * Unit tests the Point data type.
      */
     public static void main(String[] args) {
-        /* YOUR CODE HERE */
+        Point x = new Point(1, 2);
+        Point y = new Point(1, 2);
+        StdOut.println(x.compareTo(y) == 0);
+        StdOut.println(x.slopeTo(y) == Double.NEGATIVE_INFINITY);
+
+        Point x1 = new Point(10, 2);
+        Point y1 = new Point(1, 2);
+        StdOut.println(x1.compareTo(y1) == 1);
+        StdOut.println(y1.compareTo(x1) == -1);
+        StdOut.println(x1.slopeTo(y1) == +0.0);
+        StdOut.println(y1.slopeTo(x1) == +0.0);
     }
 }
