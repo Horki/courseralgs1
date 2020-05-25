@@ -48,6 +48,7 @@ public class ThreeSum {
     public static void main(String[] args) {
         StdOut.println("using unique integers!!");
         int[] arr = In.readInts();
+        int[] arr_cp = Arrays.copyOf(arr, arr.length);
         {
             Stopwatch watch_cubsub = new Stopwatch();
             int c = cube_sum(arr);
@@ -57,7 +58,7 @@ public class ThreeSum {
         }
         {
             Stopwatch watch_bettersum = new Stopwatch();
-            int c = better_sum(arr);
+            int c = better_sum(arr_cp);
             StdOut.println("solutions = " + c);
             double time = watch_bettersum.elapsedTime();
             StdOut.println("elapsed time for N2 = " + time);
