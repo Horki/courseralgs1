@@ -1,6 +1,7 @@
-package sedgewick.coursera.week4;
+package sedgewick.coursera.week4.balls;
 
 import edu.princeton.cs.algs4.StdDraw;
+import edu.princeton.cs.algs4.StdRandom;
 
 public class Ball {
     // position
@@ -18,10 +19,10 @@ public class Ball {
     }
 
     public Ball() {
-        rx = getRandomPosition();
-        ry = getRandomPosition();
-        vx = getRandomVelocity();
-        vy = getRandomVelocity();
+        rx = StdRandom.uniform(0.0, 1.0);
+        ry = StdRandom.uniform(0.0, 1.0);
+        vx = StdRandom.uniform(-.005, .005);
+        vy = StdRandom.uniform(-.005, .005);
     }
 
     public void move(double dt) {
@@ -37,13 +38,5 @@ public class Ball {
 
     public void draw() {
         StdDraw.filledCircle(rx, ry, radius);
-    }
-
-    private static double getRandomPosition() {
-        return Math.random() * ((.99 - .01));
-    }
-
-    private static double getRandomVelocity() {
-        return Math.random() * ((.02 - .01));
     }
 }

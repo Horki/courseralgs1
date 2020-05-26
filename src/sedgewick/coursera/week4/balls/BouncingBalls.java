@@ -1,4 +1,4 @@
-package sedgewick.coursera.week4;
+package sedgewick.coursera.week4.balls;
 
 import edu.princeton.cs.algs4.StdDraw;
 
