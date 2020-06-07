@@ -1,6 +1,5 @@
 package sedgewick.coursera.week5;
 
-
 public class RBTree<Key extends Comparable<Key>, Value> {
     private static final boolean RED = true;
     private static final boolean BLACK = false;
@@ -20,7 +19,6 @@ public class RBTree<Key extends Comparable<Key>, Value> {
             color = c;
         }
     }
-
 
     private boolean isRed(Node x) {
         if (x == null) {
@@ -107,8 +105,9 @@ public class RBTree<Key extends Comparable<Key>, Value> {
         }
         return h;
     }
+
     public static void main(String[] args) {
-        RBTree rbTree = new RBTree();
+        RBTree<Integer, Integer> rbTree = new RBTree<>();
         rbTree.put(1, 2);
         rbTree.put(3, 4);
         rbTree.put(5, 6);
