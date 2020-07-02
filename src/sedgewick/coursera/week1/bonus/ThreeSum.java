@@ -5,13 +5,15 @@ import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Stopwatch;
 
 public class ThreeSum {
-    private static long count(int[] a) {
+    private static int count(int[] a) {
         int N = a.length;
-        long count = 0;
+        int count = 0;
         for (int i = 0; i < N; ++i) {
             for (int j = i + 1; j < N; ++j) {
                 for (int k = j + 1; k < N; ++k) {
-                    ++count;
+                    if (a[i] + a[j] + a[k] == 0) {
+                        ++count;
+                    }
                 }
             }
         }
