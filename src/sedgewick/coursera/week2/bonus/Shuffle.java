@@ -1,20 +1,15 @@
 package sedgewick.coursera.week2.bonus;
 
 import edu.princeton.cs.algs4.StdOut;
-
-import java.util.Random;
+import edu.princeton.cs.algs4.StdRandom;
 
 public class Shuffle {
     public static void sort(Comparable[] a) {
         int N = a.length;
-        Random random = new Random();
-        random.nextInt();
+
         for (int i = 0; i < N; ++i) {
-            int change = (i + random.nextInt(N - 1)) % N;
+            int change = StdRandom.uniform(i + 1);
             exch(a, i, change);
-        }
-        if (!isSorted(a)) {
-            sort(a);
         }
     }
 
@@ -45,7 +40,11 @@ public class Shuffle {
             StdOut.print(a[i] + ", ");
         }
         StdOut.println();
-        sort(a);
+        int x = 0;
+        while (!isSorted(a)) {
+            StdOut.println("Try to get Sorted shuffle: " + ++x);
+            sort(a);
+        }
         StdOut.print("after sort: ");
         for (int i = 0; i < a.length; ++i) {
             StdOut.print(a[i] + ", ");
