@@ -4,14 +4,17 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class Bubble {
     public static void sort(Comparable[] a) {
-        int N = a.length;
-        for (int i = 0; i < N - 1; ++i) {
-            for (int j = 0; j < (N - i - 1); ++j) {
-                if (less(a[j + 1], a[j])) {
-                    exch(a, j + 1, j);
+        int bound = a.length - 1;
+        do {
+            int last = 0;
+            for (int i = 0; i < bound; ++i) {
+                if (less(a[i + 1], a[i])) {
+                    exch(a, i, i + 1);
+                    last = i;
                 }
             }
-        }
+            bound = last;
+        } while (bound > 0);
     }
 
     private static boolean less(Comparable a, Comparable b) {
