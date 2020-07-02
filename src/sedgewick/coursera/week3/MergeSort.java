@@ -1,9 +1,8 @@
 package sedgewick.coursera.week3;
 
-import edu.princeton.cs.algs4.Insertion;
 import edu.princeton.cs.algs4.StdOut;
 
-public class Merge {
+public class MergeSort {
     private static final int CUTOFF = 7;
 
     private static boolean isSorted(Comparable[] a, int lo, int hi) {
@@ -86,8 +85,9 @@ public class Merge {
         Integer[] a = {10, 1, 3, 2, 4};
         sort(a);
         for (int i : a) {
-            System.out.print(i + ", ");
+            StdOut.print(i + ", ");
         }
-        System.out.println();
+        StdOut.println();
+        StdOut.println(isSorted(a, 0, a.length - 1));
     }
 }
