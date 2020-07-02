@@ -2,7 +2,7 @@ package sedgewick.coursera.week3;
 
 import edu.princeton.cs.algs4.StdOut;
 
-public class MergeSort {
+public class Merge {
     private static final int CUTOFF = 7;
 
     private static boolean isSorted(Comparable[] a, int lo, int hi) {
@@ -82,8 +82,15 @@ public class MergeSort {
 
     // prog args -ea # enable assertion; -da # disable assertion (default)
     public static void main(String[] args) {
+        StdOut.println("Merge sort example");
         Integer[] a = {10, 1, 3, 2, 4};
+        StdOut.println("before sort");
+        for (int i : a) {
+            StdOut.print(i + ", ");
+        }
+        StdOut.println();
         sort(a);
+        StdOut.println("after sort");
         for (int i : a) {
             StdOut.print(i + ", ");
         }
