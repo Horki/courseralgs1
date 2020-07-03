@@ -1,4 +1,4 @@
-package sedgewick.coursera.week4.bonus;
+package sedgewick.coursera.week4.bonus1elementarySymbolTables;
 
 import edu.princeton.cs.algs4.StdOut;
 
