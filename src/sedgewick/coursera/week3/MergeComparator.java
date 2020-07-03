@@ -1,5 +1,7 @@
 package sedgewick.coursera.week3;
 
+import edu.princeton.cs.algs4.StdOut;
+
 import java.util.Comparator;
 
 public class MergeComparator {
@@ -34,9 +36,8 @@ public class MergeComparator {
         Integer[] a = {10, 1, 3, 2, 4};
         sort(a, DESCENDING_INT);
         for (int i : a) {
-            System.out.print(i + ", ");
+            StdOut.print(i + ", ");
         }
-        System.out.println();
+        StdOut.println();
     }
-
 }

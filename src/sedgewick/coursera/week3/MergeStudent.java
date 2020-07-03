@@ -6,8 +6,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class MergeStudent {
-    private String name;
-    private int section;
+    private final String name;
+    private final int section;
 
     public static final Comparator<MergeStudent> BY_NAME = new ByName();
     public static final Comparator<MergeStudent> BY_SECTION = new BySection();
@@ -32,7 +32,7 @@ public class MergeStudent {
     public static void main(String[] args) {
         MergeStudent[] students = new MergeStudent[]{
                 new MergeStudent("Rohde", 2),
-                    new MergeStudent("Furia", 1),
+                new MergeStudent("Furia", 1),
                 new MergeStudent("Battle", 4),
                 new MergeStudent("Chen", 3),
                 new MergeStudent("Kanaga", 3),

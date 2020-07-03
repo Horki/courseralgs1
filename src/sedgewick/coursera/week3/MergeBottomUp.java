@@ -1,5 +1,7 @@
 package sedgewick.coursera.week3;
 
+import edu.princeton.cs.algs4.StdOut;
+
 public class MergeBottomUp {
     private static Comparable[] aux;
 
@@ -9,12 +11,13 @@ public class MergeBottomUp {
 
     private static void merge(Comparable[] a, int lo, int mid, int hi) {
         // Copy
-        for (int k = lo; k <= hi; ++k) {
-            aux[k] = a[k];
+        if (hi + 1 - lo >= 0) {
+            System.arraycopy(a, lo, aux, lo, hi + 1 - lo);
         }
 
         // Merge
-        int i = lo, j = mid + 1;
+        int i = lo;
+        int j = mid + 1;
         for (int k = lo; k <= hi; ++k) {
             if (i > mid) {
                 a[k] = aux[j++];
@@ -42,9 +45,9 @@ public class MergeBottomUp {
         Integer[] a = {10, 1, 3, 2, 4};
         sort(a);
         for (int i : a) {
-            System.out.print(i + ", ");
+            StdOut.print(i + ", ");
         }
-        System.out.println();
+        StdOut.println();
     }
 
 }
