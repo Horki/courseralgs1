@@ -160,7 +160,8 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
 
 
     public Iterable<K> iterator() {
-        return null;
+        // default iterator
+        return inOrder();
     }
 
     public Iterable<K> inOrder() {
