@@ -1,6 +1,7 @@
 package sedgewick.coursera.week5;
 
 import edu.princeton.cs.algs4.Queue;
+import edu.princeton.cs.algs4.RedBlackBST;
 import sedgewick.coursera.week5.interfaces.TwoThreeTree;
 
 import edu.princeton.cs.algs4.StdOut;
@@ -64,7 +65,7 @@ public class RedBlackTree<K extends Comparable<K>, V> implements TwoThreeTree<K,
         x.left = h;
         x.color = h.color;
         x.size = h.size;
-//        h.size = size(h.)
+        h.size = size(h.left) + size(h.right) + 1;
         return x;
     }
 
@@ -75,7 +76,7 @@ public class RedBlackTree<K extends Comparable<K>, V> implements TwoThreeTree<K,
         h.color = RED;
         x.right = h;
         x.color = h.color;
-
+        h.size = size(h.left) + size(h.right) + 1;
         return x;
     }
 
@@ -264,6 +265,101 @@ public class RedBlackTree<K extends Comparable<K>, V> implements TwoThreeTree<K,
         return root == null;
     }
 
+    // Deletes
+    public void deleteMin() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("BST underflow");
+        }
+
+        // if both children of root are black, set root to red
+        if (!isRed(root.left) && !isRed(root.right)) {
+            root.color = RED;
+        }
+
+        root = deleteMin(root);
+        if (!isEmpty()) {
+            root.color = BLACK;
+        }
+    }
+
+    private Node deleteMin(Node h) {
+        if (h.left == null) {
+            return null;
+        }
+
+        if (!isRed(h.left) && !isRed(h.left.left)) {
+            h = moveRedLeft(h);
+        }
+
+        h.left = deleteMin(h.left);
+        return balance(h);
+    }
+
+    public void deleteMax() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("BST underflow");
+        }
+
+        if (!isRed(root.left) && !isRed(root.right)) {
+            root.color = RED;
+        }
+
+        root = deleteMax(root);
+        if (!isEmpty()) {
+            root.color = BLACK;
+        }
+    }
+
+    private Node deleteMax(Node h) {
+        if (isRed(h.left)) {
+            h = rotateRight(h);
+        }
+        if (h.right == null) {
+            return null;
+        }
+        if (!isRed(h.right) && !isRed(h.right.left)) {
+            h = moveRedRight(h);
+        }
+        h.right = deleteMax(h.right);
+        return balance(h);
+    }
+
+
+    private Node moveRedLeft(Node h) {
+        flipColors(h);
+        if (isRed(h.right.left)) {
+            h.right = rotateRight(h.right);
+            h = rotateLeft(h);
+            flipColors(h);
+        }
+        return h;
+    }
+
+    private Node moveRedRight(Node h) {
+        flipColors(h);
+        if (isRed(h.left.left)) {
+            h = rotateRight(h);
+            flipColors(h);
+        }
+        return h;
+    }
+
+    // restore red-black tree invariant
+    private Node balance(Node h) {
+        if (isRed(h.right)) {
+            h = rotateLeft(h);
+        }
+        if (isRed(h.left) && isRed(h.left.left)) {
+            h = rotateRight(h);
+        }
+        if (isRed(h.left) && isRed(h.right)) {
+            flipColors(h);
+        }
+
+        h.size = size(h.left) + size(h.right) + 1;
+        return h;
+    }
+
     public static void main(String[] args) {
         RedBlackTree<Integer, Integer> rbTree = new RedBlackTree<>();
         StdOut.println("init, isEmpty: " + rbTree.isEmpty());
@@ -297,7 +393,14 @@ public class RedBlackTree<K extends Comparable<K>, V> implements TwoThreeTree<K,
         for (Integer key : rbTree.keys()) {
             StdOut.println(key + ":" + rbTree.get(key));
         }
-
         StdOut.println();
+        StdOut.println("Deleted min");
+        StdOut.println("Deleted max");
+        rbTree.deleteMin();
+        rbTree.deleteMax();
+        StdOut.println("in order print");
+        for (Integer key : rbTree.keys()) {
+            StdOut.println(key + ":" + rbTree.get(key));
+        }
     }
 }
