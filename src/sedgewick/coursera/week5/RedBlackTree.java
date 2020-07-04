@@ -1,5 +1,7 @@
 package sedgewick.coursera.week5;
 
+import edu.princeton.cs.algs4.StdOut;
+
 public class RBTree<Key extends Comparable<Key>, Value> {
     private static final boolean RED = true;
     private static final boolean BLACK = false;
@@ -113,10 +115,10 @@ public class RBTree<Key extends Comparable<Key>, Value> {
         rbTree.put(5, 6);
         rbTree.put(7, 8);
         rbTree.put(9, 10);
-        System.out.println(rbTree.get(1));
-        System.out.println(rbTree.get(3));
-        System.out.println(rbTree.get(5));
-        System.out.println(rbTree.get(7));
-        System.out.println(rbTree.get(9));
+        StdOut.println(rbTree.get(1));
+        StdOut.println(rbTree.get(3));
+        StdOut.println(rbTree.get(5));
+        StdOut.println(rbTree.get(7));
+        StdOut.println(rbTree.get(9));
     }
 }
