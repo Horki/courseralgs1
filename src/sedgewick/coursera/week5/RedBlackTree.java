@@ -1,13 +1,10 @@
 package sedgewick.coursera.week5;
 
 import edu.princeton.cs.algs4.Queue;
-import edu.princeton.cs.algs4.RedBlackBST;
 import sedgewick.coursera.week5.interfaces.TwoThreeTree;
 
 import edu.princeton.cs.algs4.StdOut;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class RedBlackTree<K extends Comparable<K>, V> implements TwoThreeTree<K, V> {
