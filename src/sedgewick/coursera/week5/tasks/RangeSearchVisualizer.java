@@ -8,23 +8,7 @@ import edu.princeton.cs.algs4.RectHV;
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdIn;
 
-/******************************************************************************
- *  Compilation:  javac RangeSearchVisualizer.java
- *  Execution:    java RangeSearchVisualizer input.txt
- *  Dependencies: PointSET.java KdTree.java
- *
- *  Read points from a file (specified as a command-line argument) and
- *  draw to standard draw. Also draw all of the points in the rectangle
- *  the user selects by dragging the mouse.
- *
- *  The range search results using the brute-force algorithm are drawn
- *  in red; the results using the kd-tree algorithms are drawn in blue.
- *
- ******************************************************************************/
-
-
 public class RangeSearchVisualizer {
-
     public static void main(String[] args) {
         // initialize the data structures from file
         PointSET brute = new PointSET();
@@ -37,9 +21,12 @@ public class RangeSearchVisualizer {
             brute.insert(p);
         }
 
-        double x0 = 0.0, y0 = 0.0;      // initial endpoint of rectangle
-        double x1 = 0.0, y1 = 0.0;      // current location of mouse
-        boolean isDragging = false;     // is the user dragging a rectangle
+        // initial endpoint of rectangle
+        double x0 = 0.0, y0 = 0.0;
+        // current location of mouse
+        double x1 = 0.0, y1 = 0.0;
+        // is the user dragging a rectangle
+        boolean isDragging = false;
 
         // draw the points
         StdDraw.clear();
@@ -51,22 +38,17 @@ public class RangeSearchVisualizer {
         // process range search queries
         StdDraw.enableDoubleBuffering();
         while (true) {
-
             // user starts to drag a rectangle
             if (StdDraw.isMousePressed() && !isDragging) {
                 x0 = x1 = StdDraw.mouseX();
                 y0 = y1 = StdDraw.mouseY();
                 isDragging = true;
-            }
-
-            // user is dragging a rectangle
-            else if (StdDraw.isMousePressed() && isDragging) {
+            } else if (StdDraw.isMousePressed() && isDragging) {
+                // user is dragging a rectangle
                 x1 = StdDraw.mouseX();
                 y1 = StdDraw.mouseY();
-            }
-
-            // user stops dragging rectangle
-            else if (!StdDraw.isMousePressed() && isDragging) {
+            } else if (!StdDraw.isMousePressed() && isDragging) {
+                // user stops dragging rectangle
                 isDragging = false;
             }
 
@@ -86,8 +68,9 @@ public class RangeSearchVisualizer {
             // draw the range search results for brute-force data structure in red
             StdDraw.setPenRadius(0.03);
             StdDraw.setPenColor(StdDraw.RED);
-            for (Point2D p : brute.range(rect))
+            for (Point2D p : brute.range(rect)) {
                 p.draw();
+            }
 
             // draw the range search results for kd-tree in blue
             StdDraw.setPenRadius(0.02);

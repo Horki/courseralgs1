@@ -70,9 +70,7 @@ public class PointSET {
             throw new IllegalArgumentException("nearest error!");
         }
         Point2D result = null;
-        Iterator<Point2D> iter = data.iterator();
-        while (iter.hasNext()) {
-            Point2D point = iter.next();
+        for (Point2D point : data) {
             if (result == null || result.distanceTo(p) > point.distanceTo(p)) {
                 if (!point.equals(p)) {
                     result = point;
