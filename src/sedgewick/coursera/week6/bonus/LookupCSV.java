@@ -1,4 +1,4 @@
-package sedgewick.coursera.week6;
+package sedgewick.coursera.week6.bonus;
 
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.ST;

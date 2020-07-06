@@ -1,6 +1,5 @@
-package sedgewick.coursera.week6;
+package sedgewick.coursera.week6.bonus;
 
-import edu.princeton.cs.algs4.LinearProbingHashST;
 import edu.princeton.cs.algs4.SeparateChainingHashST;
 import edu.princeton.cs.algs4.StdOut;
 
