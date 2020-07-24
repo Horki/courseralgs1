@@ -2,6 +2,7 @@ package sedgewick.coursera.week5;
 
 import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.RedBlackBST;
+import sedgewick.coursera.week4.bonus2bst.BinarySearchTree;
 import sedgewick.coursera.week5.interfaces.TwoThreeTree;
 
 import edu.princeton.cs.algs4.StdOut;
@@ -132,7 +133,7 @@ public class RedBlackTree<K extends Comparable<K>, V> implements TwoThreeTree<K,
 
     private int height(Node x) {
         if (x == null) {
-            return -1;
+            return 0;
         }
         return 1 + Math.max(height(x.left), height(x.right));
     }
@@ -146,22 +147,6 @@ public class RedBlackTree<K extends Comparable<K>, V> implements TwoThreeTree<K,
             return 0;
         }
         return x.size;
-    }
-
-    // inorder
-    public Iterable<K> keys() {
-        Queue<K> q = new Queue<>();
-        inOrder(root, q);
-        return q;
-    }
-
-    private void inOrder(Node x, Queue<K> q) {
-        if (x == null) {
-            return;
-        }
-        inOrder(x.left, q);
-        q.enqueue(x.key);
-        inOrder(x.right, q);
     }
 
     public boolean contains(K k) {
@@ -360,6 +345,76 @@ public class RedBlackTree<K extends Comparable<K>, V> implements TwoThreeTree<K,
         return h;
     }
 
+    // default iterable is inOrder
+    public Iterable<K> keys() {
+        Queue<K> q = new Queue<>();
+        inOrder(root, q);
+        return q;
+    }
+
+    // Iterators, same as in BST
+    public Iterable<K> inOrder() {
+        Queue<K> q = new Queue<>();
+        inOrder(root, q);
+        return q;
+    }
+
+    private void inOrder(Node x, Queue<K> q) {
+        if (x == null) {
+            return;
+        }
+        inOrder(x.left, q);
+        q.enqueue((K) x.key);
+        inOrder(x.right, q);
+    }
+
+    public Iterable<K> postOrder() {
+        Queue<K> q = new Queue<>();
+        postOrder(root, q);
+        return q;
+    }
+
+    private void postOrder(Node x, Queue<K> q) {
+        if (x == null) {
+            return;
+        }
+        postOrder(x.left, q);
+        postOrder(x.right, q);
+        q.enqueue((K) x.key);
+    }
+
+    public Iterable<K> preOrder() {
+        Queue<K> q = new Queue<>();
+        preOrder(root, q);
+        return q;
+    }
+
+    private void preOrder(Node x, Queue<K> q) {
+        if (x == null) {
+            return;
+        }
+        q.enqueue((K) x.key);
+        preOrder(x.left, q);
+        preOrder(x.right, q);
+    }
+
+    public Iterable<K> levelOrder() {
+        Queue<K> q = new Queue<>();
+        Queue<Node> tmp = new Queue<>();
+        tmp.enqueue(root);
+        while (!tmp.isEmpty()) {
+            Node n = tmp.dequeue();
+            q.enqueue((K) n.key);
+            if (n.left != null) {
+                tmp.enqueue(n.left);
+            }
+            if (n.right != null) {
+                tmp.enqueue(n.right);
+            }
+        }
+        return q;
+    }
+
     public static void main(String[] args) {
         RedBlackTree<Integer, Integer> rbTree = new RedBlackTree<>();
         StdOut.println("init, isEmpty: " + rbTree.isEmpty());
@@ -402,5 +457,36 @@ public class RedBlackTree<K extends Comparable<K>, V> implements TwoThreeTree<K,
         for (Integer key : rbTree.keys()) {
             StdOut.println(key + ":" + rbTree.get(key));
         }
+
+        RedBlackTree<Character, Integer> rbTreeLeftRotate = new RedBlackTree<>();
+        rbTreeLeftRotate.put('a', 1);
+        rbTreeLeftRotate.put('b', 2);
+        rbTreeLeftRotate.put('c', 3);
+        rbTreeLeftRotate.put('d', 4);
+        rbTreeLeftRotate.put('e', 5);
+        rbTreeLeftRotate.put('f', 6);
+        rbTreeLeftRotate.put('g', 7);
+        rbTreeLeftRotate.put('h', 8);
+        rbTreeLeftRotate.put('i', 9);
+
+        // PreOrder
+        StdOut.println("Height size: " + rbTreeLeftRotate.height() + ", Size: " + rbTreeLeftRotate.size());
+        StdOut.print("PreOrder: ");
+        for (Character c : rbTreeLeftRotate.preOrder()) {
+            StdOut.print(c + ", ");
+        }
+        StdOut.print("\nInOrder: ");
+        for (Character c : rbTreeLeftRotate.inOrder()) {
+            StdOut.print(c + ", ");
+        }
+        StdOut.print("\nPostOrder: ");
+        for (Character c : rbTreeLeftRotate.postOrder()) {
+            StdOut.print(c + ", ");
+        }
+        StdOut.print("\nLevelOrder: ");
+        for (Character c : rbTreeLeftRotate.levelOrder()) {
+            StdOut.print(c + ", ");
+        }
+
     }
 }
