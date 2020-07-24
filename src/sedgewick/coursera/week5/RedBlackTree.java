@@ -488,5 +488,36 @@ public class RedBlackTree<K extends Comparable<K>, V> implements TwoThreeTree<K,
             StdOut.print(c + ", ");
         }
 
+        StdOut.println("\nRight rotate example!");
+        RedBlackTree<Character, Integer> rbTreeRightRotate = new RedBlackTree<>();
+        rbTreeRightRotate.put('i', 1);
+        rbTreeRightRotate.put('h', 2);
+        rbTreeRightRotate.put('g', 3);
+        rbTreeRightRotate.put('f', 4);
+        rbTreeRightRotate.put('e', 5);
+        rbTreeRightRotate.put('d', 6);
+        rbTreeRightRotate.put('c', 7);
+        rbTreeRightRotate.put('b', 8);
+        rbTreeRightRotate.put('a', 9);
+
+        // PreOrder
+        StdOut.println("Height size: " + rbTreeRightRotate.height() + ", Size: " + rbTreeRightRotate.size());
+        StdOut.print("PreOrder: ");
+        for (Character c : rbTreeRightRotate.preOrder()) {
+            StdOut.print(c + ", ");
+        }
+        StdOut.print("\nInOrder: ");
+        for (Character c : rbTreeRightRotate.inOrder()) {
+            StdOut.print(c + ", ");
+        }
+        StdOut.print("\nPostOrder: ");
+        for (Character c : rbTreeRightRotate.postOrder()) {
+            StdOut.print(c + ", ");
+        }
+        StdOut.print("\nLevelOrder: ");
+        for (Character c : rbTreeRightRotate.levelOrder()) {
+            StdOut.print(c + ", ");
+        }
+
     }
 }
