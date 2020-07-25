@@ -3,6 +3,8 @@ package sedgewick.coursera.week5;
 import edu.princeton.cs.algs4.StdOut;
 import sedgewick.coursera.week5.interfaces.TwoThreeTree;
 
+import java.util.NoSuchElementException;
+
 // Balanced Tree
 public class BTree<K extends Comparable<K>, V> implements TwoThreeTree<K, V> {
     private static final class Node {
@@ -65,6 +67,46 @@ public class BTree<K extends Comparable<K>, V> implements TwoThreeTree<K, V> {
             throw new IllegalArgumentException("argument to get() is null");
         }
         return search(root, k, height);
+    }
+
+    public boolean contains(K k) {
+        return get(k) != null;
+    }
+
+    public K min() {
+        return min(root);
+    }
+
+    private K min(Node x) {
+        if (isEmpty()) {
+            throw new NoSuchElementException("calls min() with empty symbol table");
+        }
+        while (true) {
+            Node next = x.children[0].next;
+            if (next != null) {
+                x = next;
+            } else {
+                return (K) x.children[0].key;
+            }
+        }
+    }
+
+    public K max() {
+        return max(root);
+    }
+
+    private K max(Node x) {
+        if (isEmpty()) {
+            throw new NoSuchElementException("calls max() with empty symbol table");
+        }
+        while (true) {
+            Node next = x.children[x.m - 1].next;
+            if (next != null) {
+                x = next;
+            } else {
+                return (K) x.children[x.m - 1].key;
+            }
+        }
     }
 
     private V search(Node x, K k, int ht) {
@@ -212,5 +254,17 @@ public class BTree<K extends Comparable<K>, V> implements TwoThreeTree<K, V> {
         StdOut.println("height:  " + st.height());
         StdOut.println(st);
         StdOut.println();
+        StdOut.println("min = " + st.min());
+        StdOut.println("max = " + st.max());
+
+        {
+            BTree<Integer, Integer> btree = new BTree<>();
+            btree.put(4, 4);
+            btree.put(1, 1);
+            btree.put(3, 3);
+            StdOut.println("contains 3 = " + btree.contains(3));
+            StdOut.println("min = " + btree.min());
+            StdOut.println("max = " + btree.max());
+        }
     }
 }
