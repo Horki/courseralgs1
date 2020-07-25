@@ -11,4 +11,10 @@ public interface TwoThreeTree<K, V> {
     int size();
 
     boolean isEmpty();
+
+    boolean contains(K key);
+
+    K min();
+
+    K max();
 }
