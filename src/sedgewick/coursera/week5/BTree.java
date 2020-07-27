@@ -132,10 +132,10 @@ public class BTree<K extends Comparable<K>, V> implements TwoThreeTree<K, V> {
             throw new IllegalArgumentException("argument key to put() is null");
         }
         Node u = insert(root, key, val, height);
-        ++n;
         if (u == null) {
             return;
         }
+        ++n;
 
         Node t = new Node(2);
         t.children[0] = new Entry(root.children[0].key, null, root);
