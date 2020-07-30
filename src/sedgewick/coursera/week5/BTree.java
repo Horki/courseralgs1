@@ -21,7 +21,7 @@ public class BTree<K extends Comparable<K>, V> implements TwoThreeTree<K, V> {
 
     private static class Entry {
         private Comparable key;
-        private final Object val;
+        private Object val;
         // helper field to iterate over array entries
         private Node next;
 
@@ -164,6 +164,7 @@ public class BTree<K extends Comparable<K>, V> implements TwoThreeTree<K, V> {
                         return null;
                     }
                     t.key = u.children[0].key;
+                    t.val = null;
                     t.next = u;
                     break;
                 }
@@ -174,7 +175,7 @@ public class BTree<K extends Comparable<K>, V> implements TwoThreeTree<K, V> {
             System.arraycopy(h.children, j, h.children, j + 1, h.m - j);
         }
         h.children[j] = t;
-        h.m++;
+        ++h.m;
         if (h.m < M) {
             return null;
         } else {
@@ -256,15 +257,5 @@ public class BTree<K extends Comparable<K>, V> implements TwoThreeTree<K, V> {
         StdOut.println();
         StdOut.println("min = " + st.min());
         StdOut.println("max = " + st.max());
-
-        {
-            BTree<Integer, Integer> btree = new BTree<>();
-            btree.put(4, 4);
-            btree.put(1, 1);
-            btree.put(3, 3);
-            StdOut.println("contains 3 = " + btree.contains(3));
-            StdOut.println("min = " + btree.min());
-            StdOut.println("max = " + btree.max());
-        }
     }
 }
