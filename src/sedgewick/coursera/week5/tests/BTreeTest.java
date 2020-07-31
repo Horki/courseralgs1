@@ -33,6 +33,34 @@ public class BTreeTest {
     }
 
     @org.junit.Test
+    public void my_btree_left_rotate() {
+        BTree btree = new BTree();
+        for (int i = 1; i <= 1000; ++i) {
+            btree.put(i, i + 1);
+        }
+        Assert.assertEquals(1000, btree.size());
+        Assert.assertEquals(8, btree.height());
+        Assert.assertEquals(501, (int) btree.get(500));
+        Assert.assertTrue(btree.contains(500));
+        Assert.assertEquals(1, btree.min());
+        Assert.assertEquals(1000, btree.max());
+    }
+
+    @org.junit.Test
+    public void my_btree_right_rotate() {
+        BTree btree = new BTree();
+        for (int i = 1000; i > 0; --i) {
+            btree.put(i, i + 1);
+        }
+        Assert.assertEquals(1000, btree.size());
+        Assert.assertEquals(8, btree.height());
+        Assert.assertEquals(501, (int) btree.get(500));
+        Assert.assertTrue(btree.contains(500));
+        Assert.assertEquals(1, btree.min());
+        Assert.assertEquals(1000, btree.max());
+    }
+
+    @org.junit.Test
     public void algs4_btree() {
         edu.princeton.cs.algs4.BTree btree = new edu.princeton.cs.algs4.BTree();
         Assert.assertTrue(btree.isEmpty());
@@ -57,4 +85,25 @@ public class BTreeTest {
         }
     }
 
+    @org.junit.Test
+    public void algs4_btree_left_rotate() {
+        edu.princeton.cs.algs4.BTree btree = new edu.princeton.cs.algs4.BTree();
+        for (int i = 1; i <= 1000; ++i) {
+            btree.put(i, i + 1);
+        }
+        Assert.assertEquals(1000, btree.size());
+        Assert.assertEquals(8, btree.height());
+        Assert.assertEquals(501, (int) btree.get(500));
+    }
+
+    @org.junit.Test
+    public void algs4_btree_right_rotate() {
+        edu.princeton.cs.algs4.BTree btree = new edu.princeton.cs.algs4.BTree();
+        for (int i = 1000; i > 0; --i) {
+            btree.put(i, i + 1);
+        }
+        Assert.assertEquals(1000, btree.size());
+        Assert.assertEquals(8, btree.height());
+        Assert.assertEquals(501, (int) btree.get(500));
+    }
 }
