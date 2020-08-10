@@ -57,30 +57,31 @@ public class RedBlackTree<K extends Comparable<K>, V> implements TwoThreeTree<K,
     }
 
     private Node rotateLeft(Node h) {
-        assert isRed(h.right);
+        assert (h != null) && isRed(h.right);
         Node x = h.right;
         h.right = x.left;
-        h.color = RED;
         x.left = h;
-        x.color = h.color;
+        x.color = x.left.color;
+        x.left.color = RED;
         x.size = h.size;
         h.size = size(h.left) + size(h.right) + 1;
         return x;
     }
 
     private Node rotateRight(Node h) {
-        assert isRed(h.left);
+        assert (h != null) && isRed(h.left);
         Node x = h.left;
         h.left = x.right;
-        h.color = RED;
         x.right = h;
-        x.color = h.color;
+        x.color = x.right.color;
+        x.right.color = RED;
+        x.size = h.size;
         h.size = size(h.left) + size(h.right) + 1;
         return x;
     }
 
     private void flipColors(Node h) {
-        assert isRed(h);
+        assert !isRed(h);
         assert isRed(h.left);
         assert isRed(h.right);
         h.color = RED;
@@ -131,7 +132,7 @@ public class RedBlackTree<K extends Comparable<K>, V> implements TwoThreeTree<K,
 
     private int height(Node x) {
         if (x == null) {
-            return 0;
+            return -1;
         }
         return 1 + Math.max(height(x.left), height(x.right));
     }
