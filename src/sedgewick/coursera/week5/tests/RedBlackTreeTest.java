@@ -33,21 +33,6 @@ public class RedBlackTreeTest {
     }
 
     @org.junit.Test
-    public void my_rbtree_left_rotate() {
-        RedBlackTree<Character, Integer> rbtree = new RedBlackTree<>();
-        rbtree.put('a', 1);
-        rbtree.put('b', 2);
-        rbtree.put('c', 3);
-        rbtree.put('d', 4);
-        rbtree.put('e', 5);
-        rbtree.put('f', 6);
-        Gson gson = new Gson();
-        StdOut.println(gson.toJson(rbtree));
-        Assert.assertTrue(true);
-    }
-
-
-    @org.junit.Test
     public void my_rbtree_left_rotate_thousand() {
         RedBlackTree<Integer, Integer> rbtree = new RedBlackTree<>();
         Assert.assertTrue(rbtree.isEmpty());
@@ -108,11 +93,10 @@ public class RedBlackTreeTest {
     }
 
     @org.junit.Test
-    @org.junit.Ignore
     public void my_left_rotate_pre_order() {
         int j = 1;
         RedBlackTree<Character, Integer> my_rbtree = new RedBlackTree<>();
-        char[] result = {'h', 'f', 'd', 'b', 'a', 'c', 'e', 'g', 'i'};
+        char[] result = {'d', 'b', 'a', 'c', 'h', 'f', 'e', 'g', 'i'};
         for (char i = 'a'; i <= 'i'; ++i, ++j) {
             my_rbtree.put(i, j);
         }
@@ -165,11 +149,10 @@ public class RedBlackTreeTest {
     }
 
     @org.junit.Test
-    @org.junit.Ignore
     public void my_left_rotate_post_order() {
         int j = 1;
         RedBlackTree<Character, Integer> my_rbtree = new RedBlackTree<>();
-        char[] result = {'a', 'c', 'b', 'e', 'd', 'g', 'f', 'i', 'h'};
+        char[] result = {'a', 'c', 'b', 'e', 'g', 'f', 'i', 'h', 'd'};
         for (char i = 'a'; i <= 'i'; ++i, ++j) {
             my_rbtree.put(i, j);
         }
@@ -194,22 +177,20 @@ public class RedBlackTreeTest {
     }
 
     @org.junit.Test
-    @org.junit.Ignore
     public void my_left_rotate_level_order() {
         int j = 1;
         RedBlackTree<Character, Integer> my_rbtree = new RedBlackTree<>();
-        char[] result = {'h', 'f', 'i', 'd', 'g', 'b', 'e', 'a', 'c'};
+        char[] result = {'d', 'b', 'h', 'a', 'c', 'f', 'i', 'e', 'g'};
         for (char i = 'a'; i <= 'i'; ++i, ++j) {
             my_rbtree.put(i, j);
         }
         j = 0;
-        for (Character item : my_rbtree.postOrder()) {
+        for (Character item : my_rbtree.levelOrder()) {
             Assert.assertEquals(item, (Character) result[j++]);
         }
     }
 
     @org.junit.Test
-    @org.junit.Ignore
     public void my_right_rotate_level_order() {
         int j = 1;
         RedBlackTree<Character, Integer> my_rbtree = new RedBlackTree<>();
@@ -218,7 +199,7 @@ public class RedBlackTreeTest {
             my_rbtree.put(i, j);
         }
         j = 0;
-        for (Character item : my_rbtree.postOrder()) {
+        for (Character item : my_rbtree.levelOrder()) {
             Assert.assertEquals(item, (Character) result[j++]);
         }
     }
