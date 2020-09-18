@@ -10,7 +10,7 @@ import sedgewick.coursera.week1.libs.QuickUnionWeightedUF;
 import java.util.ArrayList;
 
 public class UnionUFTest {
-    private ArrayList<UF> unionFind = new ArrayList(2);
+    private final ArrayList<UF> unionFind = new ArrayList(2);
     private final int N = 10;
 
     @Before

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 
 public class UFTest {
-    private ArrayList<UF> ufs = new ArrayList<UF>(3);
+    private final ArrayList<UF> ufs = new ArrayList<>(3);
     private final int capacity = 10;
 
     @Before
