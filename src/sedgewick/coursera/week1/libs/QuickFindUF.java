@@ -3,9 +3,9 @@ package sedgewick.coursera.week1.libs;
 import sedgewick.coursera.week1.interfaces.UF;
 
 public class QuickFindUF implements UF<Integer> {
-    private Integer[] id;
-    private int cnt;
-    private int capacity;
+    private final Integer[] id;
+    private final int cnt;
+    private final int capacity;
 
     /*
     Set id of each object to itself

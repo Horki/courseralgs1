@@ -3,11 +3,11 @@ package sedgewick.coursera.week1.libs;
 import sedgewick.coursera.week1.interfaces.UF;
 
 public class QuickUnionLargest implements UF<Integer> {
-    private Integer[] id;
-    private Integer[] sizes;
-    private Integer[] largest;
+    private final Integer[] id;
+    private final Integer[] sizes;
+    private final Integer[] largest;
     private int cnt;
-    private int capacity;
+    private final int capacity;
 
     public QuickUnionLargest(int N) {
         cnt = N;

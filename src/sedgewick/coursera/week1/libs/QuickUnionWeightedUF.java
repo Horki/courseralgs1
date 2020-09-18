@@ -3,10 +3,10 @@ package sedgewick.coursera.week1.libs;
 import sedgewick.coursera.week1.interfaces.UF;
 
 public class QuickUnionWeightedUF implements UF<Integer> {
-    private Integer[] id;
-    private Integer[] sz;
+    private final Integer[] id;
+    private final Integer[] sz;
     private int cnt;
-    private int capacity;
+    private final int capacity;
 
     public QuickUnionWeightedUF(int N) {
         cnt = N;
