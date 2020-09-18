@@ -35,7 +35,7 @@ public class BitonicArray {
         return -1; // not found
     }
 
-    private static int find_max(int arr[], int lo, int hi) {
+    private static int find_max(int[] arr, int lo, int hi) {
         int mid = lo + ((hi - lo) / 2);
         if (arr[mid] > arr[mid - 1] && arr[mid] > arr[mid + 1]) {
             return mid;
@@ -57,11 +57,7 @@ public class BitonicArray {
         if (r1 != -1) {
             return r1;
         }
-        int r2 = binary_search_reverse(arr, val, mid_max + 1, arr.length - 1);
-        if (r2 != -1) {
-            return r2;
-        }
-        return -1;
+        return binary_search_reverse(arr, val, mid_max + 1, arr.length - 1);
     }
 
 
@@ -69,7 +65,7 @@ public class BitonicArray {
         // "unit" tests
         {
             // Regular bin search
-            int arr[] = {10, 22, 33, 44, 55};
+            int[] arr = {10, 22, 33, 44, 55};
             StdOut.println(binary_search(arr, 10, 0, arr.length - 1) == 0);
             StdOut.println(binary_search(arr, 22, 0, arr.length - 1) == 1);
             StdOut.println(binary_search(arr, 33, 0, arr.length - 1) == 2);
@@ -78,7 +74,7 @@ public class BitonicArray {
         }
         {
             // Reversed bin search
-            int arr[] = {55, 44, 33, 22, 10};
+            int[] arr = {55, 44, 33, 22, 10};
             StdOut.println(binary_search_reverse(arr, 10, 0, arr.length - 1) == 4);
             StdOut.println(binary_search_reverse(arr, 22, 0, arr.length - 1) == 3);
             StdOut.println(binary_search_reverse(arr, 33, 0, arr.length - 1) == 2);
@@ -86,7 +82,7 @@ public class BitonicArray {
             StdOut.println(binary_search_reverse(arr, 55, 0, arr.length - 1) == 0);
         }
         {
-            int arr[] = {10, 22, 33, 44, 55, -33, -44, -88, -99};
+            int[] arr = {10, 22, 33, 44, 55, -33, -44, -88, -99};
             StdOut.println(bitonic_search(arr, 44) == 3);
             StdOut.println(bitonic_search(arr, -33) == 5);
             StdOut.println(bitonic_search(arr, -333) == -1);

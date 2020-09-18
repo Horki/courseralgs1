@@ -5,11 +5,11 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 
 public class Percolation {
-    private int len;
-    private int w;
+    private final int len;
+    private final int w;
     private int cnt_open;
-    private int matrix[];
-    private WeightedQuickUnionUF weightedQuickUnionUF;
+    private final int[] matrix;
+    private final WeightedQuickUnionUF weightedQuickUnionUF;
 
     // creates n-by-n grid, with all sites initially blocked
     public Percolation(int n) {
@@ -91,13 +91,13 @@ public class Percolation {
 
     // test client (optional)
     public static void main(String[] args) {
-        Percolation perc = new Percolation(3);
-        perc.open(1, 2);
-        perc.open(2, 2);
-        perc.open(2, 3);
-        perc.open(3, 3);
-        boolean c = perc.isFull(1, 1);
-        boolean c2 = perc.percolates();
+        Percolation percolation = new Percolation(3);
+        percolation.open(1, 2);
+        percolation.open(2, 2);
+        percolation.open(2, 3);
+        percolation.open(3, 3);
+        boolean c = percolation.isFull(1, 1);
+        boolean c2 = percolation.percolates();
         StdOut.println(c);
         StdOut.println(c2);
     }
