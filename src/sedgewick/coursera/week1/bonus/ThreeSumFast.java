@@ -14,7 +14,7 @@ public class ThreeSumFast {
         int count = 0;
         for (int i = 0; i < N; ++i) {
             for (int j = i + 1; j < N; ++j) {
-                if (BinarySearch.rank(-a[i] - a[j], a) > j) {
+                if (BinarySearch.indexOf(a, -a[i] - a[j]) > j) {
                     ++count;
                 }
             }
@@ -25,6 +25,7 @@ public class ThreeSumFast {
     // 1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt
     public static void main(String[] args) {
         StdOut.println("Threesum faster, N^2 log N");
+        StdOut.println(args);
         int[] a = In.readInts(args[0]);
         int[] b = In.readInts(args[1]);
         int[] c = In.readInts(args[2]);
@@ -33,6 +34,7 @@ public class ThreeSumFast {
             StdOut.println("1K ints");
             Stopwatch stopwatch = new Stopwatch();
             StdOut.println(count(a));
+            StdOut.println(count(a) == 0);
             double time = stopwatch.elapsedTime();
             StdOut.println("elapsed time: " + time);
         }
@@ -40,6 +42,7 @@ public class ThreeSumFast {
             StdOut.println("2K ints");
             Stopwatch stopwatch = new Stopwatch();
             StdOut.println(count(b));
+            StdOut.println(count(b) == 2);
             double time = stopwatch.elapsedTime();
             StdOut.println("elapsed time: " + time);
         }
@@ -47,6 +50,7 @@ public class ThreeSumFast {
             StdOut.println("4K ints");
             Stopwatch stopwatch = new Stopwatch();
             StdOut.println(count(c));
+            StdOut.println(count(c) == 2);
             double time = stopwatch.elapsedTime();
             StdOut.println("elapsed time: " + time);
         }
@@ -54,6 +58,7 @@ public class ThreeSumFast {
             StdOut.println("8K ints");
             Stopwatch stopwatch = new Stopwatch();
             StdOut.println(count(d));
+            StdOut.println(count(d) == 18);
             double time = stopwatch.elapsedTime();
             StdOut.println("elapsed time: " + time);
         }
