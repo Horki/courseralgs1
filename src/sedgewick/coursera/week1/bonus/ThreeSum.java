@@ -22,10 +22,10 @@ public class ThreeSum {
 
     // 1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt
     public static void main(String[] args) {
-        int[] a = In.readInts(args[0]);
-        int[] b = In.readInts(args[1]);
-        int[] c = In.readInts(args[2]);
-        int[] d = In.readInts(args[3]);
+        int[] a = new In(args[0]).readAllInts();
+        int[] b = new In(args[1]).readAllInts();
+        int[] c = new In(args[2]).readAllInts();
+        int[] d = new In(args[3]).readAllInts();
         {
             StdOut.println("1K ints");
             Stopwatch stopwatch = new Stopwatch();
